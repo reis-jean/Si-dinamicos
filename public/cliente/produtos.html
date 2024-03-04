@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contratos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            width: 40%;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        #clients-list tr:last-child td {
+            border-bottom: none;
+        }
+       
+        .button-container{
+            width: 600px;
+            position: absolute;
+            right: 10px;
+            top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form{
+            margin-right: 5%;
+        }
+
+        button{
+            width: 100%;
+            padding: 10px;
+            margin-right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #sair{
+            background-color: #ff0000;
+            color: #fff;
+        }
+        
+        a{
+            text-decoration: none;
+            text-transform: none;
+        }
+        .nome-user{
+            width: 600px;
+            position: absolute;
+            left: 10px;
+            top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="nome-user">
+    <p id="nome-cliente"></p>
+</div>
+    
+    
+    <div class="button-container">
+      
+       
+        <button type="submit"> <a href="https://reisjean.com/cliente/cadastrarproduto.html"> Cadastrar Produtos</a></button>
+       
+        <form action="https://reisjean.com/logout"  method="get">
+            <button id="sair" type="submit">Sair</button>
+        </form>
+    </div>
+    
+
+    <div class="table-container">
+        <h2>Lista de contratos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>fabricante</th>
+                </tr>
+            </thead>
+            <tbody id="clients-list">
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+    function checkLogin() {
+        fetch('https://reisjean.com/check-login')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.loggedIn) {
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao verificar login:', error);
+            });
+
+        fetch('https://reisjean.com/loginclients/products').then(response => response.json())
+            .then(data => {
+                // console.log(data);
+                const clientsList = document.querySelector('#clients-list');
+                clientsList.innerHTML = '';
+                data.forEach(client => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${client.titulo}</td>
+                        <td>${client.descricao}</td>
+                        <td>${client.preco}</td>
+                        <td>${client.fabricante}</td>`;
+                    clientsList.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao buscar lista de produtos:', error);
+            });
+    }
+    
+    // Função para buscar o nome do cliente e atualizar na página
+        function fetchNomeCliente() {
+            fetch('https://reisjean.com/loginclients/nomecliente')
+                .then(response => response.json())
+                .then(data => {
+                    const nomeClienteElement = document.getElementById('nome-cliente');
+                    console.log(data.nome_cliente);
+                    if (data.nome_cliente) {
+                        
+                        nomeClienteElement.textContent = data.nome_cliente;
+                    } else {
+                        nomeClienteElement.textContent = 'Nome do ';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar o nome do cliente:', error);
+                });
+        }
+
+
+
+    window.onload = function() {
+    checkLogin();
+    fetchNomeCliente();
+};
+        
+
+    </script>
+</body>
+
+</html>
