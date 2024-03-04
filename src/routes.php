@@ -23,7 +23,7 @@ require __DIR__ . '/routes/contracts.php';
 // };
 
 $app->get('/', function (Request $request, Response $response) {
-    // Redireciona para o arquivo inicial desejado (por exemplo, index.html)
+   
     return $response->withRedirect('/cliente');
 });
 
@@ -39,16 +39,16 @@ $app->get('/check-login', function (Request $request, Response $response) {
 });
 
 $app->get('/logoutadmin', function ($request, $response) {
-    // Destruir a sessão do usuário
+    
     session_destroy();
     
-    // Redirecionar para a página de login ou qualquer outra página desejada
-    return $response->withRedirect('/admin'); // Redireciona para a página de login
+    
+    return $response->withRedirect('/admin'); 
 });
 $app->get('/logout', function ($request, $response) {
-    // Destruir a sessão do usuário
+   
     session_destroy();
     
-    // Redirecionar para a página de login ou qualquer outra página desejada
-    return $response->withRedirect('/'); // Redireciona para a página de login
+    
+    return $response->withRedirect('/'); // vai para a página de login
 });

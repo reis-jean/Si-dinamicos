@@ -68,7 +68,7 @@
    
     <div class="login-container">
         <h2>Cadastrar Cliente</h2>
-        <form id="login-form" action="https://reisjean.com/loginadmin/newcontract" method="POST">
+        <form id="login-form" action="loginadmin/newcontract" method="POST">
             <div class="form-group">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
@@ -94,7 +94,7 @@
             .then(response => response.json())
             .then(data => {
                 if (!data.loggedIn) {
-                    window.location.href = 'https://reisjean.com/admin/index.html';
+                    window.location.href = 'admin/index.html';
                 }
             })
             .catch(error => {
@@ -107,13 +107,13 @@
     document.getElementById('login-form').addEventListener('submit', function(event) {
         event.preventDefault(); 
         checkLogin();
-        // Obtém os valores dos campos do formulário
+        // pega os campo do form
         const name = document.getElementById('name').value;
         const database = document.getElementById('database').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        // Cria um objeto com os dados do contrato
+        // Cria um obj dos daos
         const contractData = {
             name: name,
             database: database,
@@ -121,8 +121,8 @@
             password: password
         };
 
-        // Envia os dados para a rota de cadastro
-        fetch('https://reisjean.com/loginadmin/newcontract', {
+  
+        fetch('loginadmin/newcontract', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -131,12 +131,10 @@
         })
         .then(response => response.json())
         .then(data => {
-             // Exibe a mensagem de retorno
-            // Redireciona para outra página, se necessário
-
+           
             if(data.message){
                 alert(data.message)
-                window.location.href = 'https://reisjean.com/admin/contratos.html';
+                window.location.href = 'admin/contratos.html';
             }
             alert(data.error)
         })

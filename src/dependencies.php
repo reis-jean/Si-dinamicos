@@ -24,7 +24,6 @@ return function (App $app) {
         return $logger;
     };
 
-    // Registrar o serviço 'db' no contêiner
     $container['db'] = function ($c) {
         $capsule = new Capsule;
         $capsule->addConnection($c->get('settings')['db']);

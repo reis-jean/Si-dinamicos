@@ -103,9 +103,9 @@
     <div class="button-container">
       
        
-        <button type="submit"> <a href="https://reisjean.com/cliente/cadastrarproduto.html"> Cadastrar Produtos</a></button>
+        <button type="submit"> <a href="cliente/cadastrarproduto.html"> Cadastrar Produtos</a></button>
        
-        <form action="https://reisjean.com/logout"  method="get">
+        <form action="/logout"  method="get">
             <button id="sair" type="submit">Sair</button>
         </form>
     </div>
@@ -129,7 +129,7 @@
     </div>
     <script>
     function checkLogin() {
-        fetch('https://reisjean.com/check-login')
+        fetch('/check-login')
             .then(response => response.json())
             .then(data => {
                 if (!data.loggedIn) {
@@ -140,7 +140,7 @@
                 console.error('Erro ao verificar login:', error);
             });
 
-        fetch('https://reisjean.com/loginclients/products').then(response => response.json())
+        fetch('/loginclients/products').then(response => response.json())
             .then(data => {
                 // console.log(data);
                 const clientsList = document.querySelector('#clients-list');
@@ -162,7 +162,7 @@
     
     // Função para buscar o nome do cliente e atualizar na página
         function fetchNomeCliente() {
-            fetch('https://reisjean.com/loginclients/nomecliente')
+            fetch('/loginclients/nomecliente')
                 .then(response => response.json())
                 .then(data => {
                     const nomeClienteElement = document.getElementById('nome-cliente');

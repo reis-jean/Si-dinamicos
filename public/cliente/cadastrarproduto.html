@@ -68,7 +68,7 @@
    
     <div class="login-container">
         <h2>Cadastrar Produto</h2>
-        <form id="login-form" action="https://reisjean.com/loginclients/produtoscadastrar" method="POST">
+        <form id="login-form" action="loginclients/produtoscadastrar" method="POST">
             <div class="form-group">
                 <label for="titulo">Titulo:</label>
                 <input type="text" id="titulo" name="titulo" required>
@@ -94,7 +94,7 @@
             .then(response => response.json())
             .then(data => {
                 if (!data.loggedIn) {
-                    window.location.href = 'https://reisjean.com/cliente/index.html';
+                    window.location.href = '/cliente/index.html';
                 }
             })
             .catch(error => {
@@ -122,7 +122,7 @@
                 fabricante: fabricante
             };
 
-            fetch('https://reisjean.com/loginclients/produtoscadastrar', {
+            fetch('loginclients/produtoscadastrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -133,7 +133,7 @@
             .then(data => {
                 if (data.message) {
                     alert(data.message);
-                    window.location.href = 'https://reisjean.com/cliente/produtos.html';
+                    window.location.href = 'cliente/produtos.html';
                 } else if (data.error) {
                     alert(data.error);
                 }

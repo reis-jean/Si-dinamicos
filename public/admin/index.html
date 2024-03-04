@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produto</title>
+    <title>login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,7 +67,7 @@
    
     <div class="login-container">
         <h2>Login Admin</h2>
-        <form id="login-form" action="https://reisjean.com/loginadmin/auth" method="POST">
+        <form id="login-form" action="loginadmin/auth" method="POST">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -87,14 +87,14 @@
             var formData = new FormData(this);
             
             
-            fetch('https://reisjean.com/loginadmin/auth', {
+            fetch('loginadmin/auth', {
                 method: 'POST',
                 body: formData
             })
             .then(response => {
                 if (response.ok) {
                   
-                    window.location.href = 'https://reisjean.com/admin/contratos.html'; 
+                    window.location.href = 'admin/contratos.html'; 
                 } else {
                     
                     return response.json().then(data => {

@@ -88,11 +88,11 @@
 <body>
     <div class="button-container">
       
-        <button type="submit"> <a href="https://reisjean.com/admin/cadastraradmin.html"> Cadastrar Admin</a></button>
+        <button type="submit"> <a href="admin/cadastraradmin.html"> Cadastrar Admin</a></button>
 
-        <button type="submit"> <a href="https://reisjean.com/admin/cadastrarcliente.html"> Cadastrar Contrato</a></button>
+        <button type="submit"> <a href="admin/cadastrarcliente.html"> Cadastrar Contrato</a></button>
        
-        <form action="https://reisjean.com/logoutadmin"  method="get">
+        <form action="logoutadmin"  method="get">
             <button id="sair" type="submit">Sair</button>
         </form>
     </div>
@@ -115,18 +115,18 @@
     </div>
     <script>
     function checkLogin() {
-        fetch('https://reisjean.com/check-login')
+        fetch('check-login')
             .then(response => response.json())
             .then(data => {
                 if (!data.loggedIn) {
-                    window.location.href = 'https://reisjean.com/admin/index.html';
+                    window.location.href = 'admin/index.html';
                 }
             })
             .catch(error => {
                 console.error('Erro ao verificar login:', error);
             });
 
-        fetch('https://reisjean.com/loginadmin/clients').then(response => response.json())
+        fetch('loginadmin/clients').then(response => response.json())
             .then(data => {
                 const clientsList = document.querySelector('#clients-list');
                 clientsList.innerHTML = '';
